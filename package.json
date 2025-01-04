@@ -8,7 +8,9 @@
     "build:prod": "ng build --prod --aot --source-map",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "lint-fix": "ng lint --fix && npm run format",
+    "format": "prettier --write \"src/**/*.{ts,js,json,css,scss,html}\""
   },
   "private": true,
   "dependencies": {

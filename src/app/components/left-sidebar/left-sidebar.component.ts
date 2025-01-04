@@ -1,14 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-left-sidebar',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
+  imports: [CommonModule, RouterModule],
   templateUrl: './left-sidebar.component.html',
   styleUrl: './left-sidebar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
