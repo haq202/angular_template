@@ -1,0 +1,13 @@
+@import 'variables';
+.markValidate,
+.form-error {
+  color: $red !important;
+}
+
+.title {
+  color: $black;
+  font-size: $text-sm;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
