@@ -1,0 +1,155 @@
+<p-table
+  #dt
+  [columns]="columns()"
+  [value]="data"
+  scrollHeight="{{ scrollHeight() }}"
+  [scrollable]="true"
+  [(selection)]="selectedRows"
+  (onRowSelect)="onRowSelect($event)"
+  [selectionPageOnly]="true"
+  (onRowUnselect)="onRowUnselect($event)"
+  (onHeaderCheckboxToggle)="onHeaderCheckboxToggle($event)"
+  (sortFunction)="onSort($event)"
+  [customSort]="isSorted()"
+  [dataKey]="dataKey()"
+  [rowHover]="true">
+  <ng-template pTemplate="header">
+    @switch (headerTableType()) {
+      @case ('default') {
+        <tr>
+          @if (isShowCheckbox()) {
+            <th id="checkbox" class="text-center" [attr.colspan]="1">
+              <ng-container *ngIf="isShowCheckbox">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </ng-container>
+            </th>
+          }
+
+          @if (isShowOrderNumber()) {
+            <th
+              id="orderNumber"
+              [attr.colspan]="1"
+              [attr.rowspan]="rows.length > 1 ? rows.length : 1">
+              {{ colOrderNumberName() }}
+            </th>
+          }
+
+          @for (col of columns(); track $index) {
+            @if (isSorted()) {
+              <th
+                [pSortableColumn]="col['field'] || ''"
+                id="th2{{ $index }}"
+                [ngStyle]="{
+                  'min-width': col['minWidth'] || 'unset',
+                  'max-width': col['maxWidth'] || 'unset',
+                  width: col['width'],
+                }"
+                class="{{ col.thClassName }}"
+                [attr.colSpan]="col.thColSpan || 1"
+                [attr.rowSpan]="col.thRowSpan || 1">
+                <div class="flex justify-content-between align-items-center">
+                  <span>{{ col.header }}</span>
+                  <p-sortIcon [field]="col['field'] || ''" />
+                </div>
+              </th>
+            } @else {
+              <th
+                id="th{{ $index }}"
+                [ngStyle]="{
+                  'min-width': col['minWidth'] || 'unset',
+                  'max-width': col['maxWidth'] || 'unset',
+                  width: col['width'],
+                }"
+                class="{{ col.thClassName }}"
+                [attr.colSpan]="col.thColSpan || 1"
+                [attr.rowSpan]="col.thRowSpan || 1">
+                {{ col.header }}
+              </th>
+            }
+          }
+        </tr>
+      }
+      @case ('custom') {
+        <ng-container
+          [ngTemplateOutlet]="customHeaderTable"
+          [ngTemplateOutletContext]="{
+            $implicit: rows,
+          }"></ng-container>
+      }
+    }
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-index="rowIndex">
+    @switch (bodyTableType()) {
+      @case ('default') {
+        <tr class="{{ rowData.rowCustomClasses || '' }}">
+          @if (isShowCheckbox()) {
+            <td class="text-center">
+              <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+            </td>
+          }
+
+          @if (isShowOrderNumber()) {
+            <td [ngClass]="{ 'cursor-pointer': isClickRecord() }">
+              {{ index + 1 + currentPage() * rows() }}
+            </td>
+          }
+
+          @for (col of columns(); track $index) {
+            <td
+              [style.maxWidth]="col?.['maxWidth'] || 'unset'"
+              [style.minWidth]="col?.['minWidth'] || 'unset'"
+              [style.width]="col?.['width'] || 'unset'"
+              [ngClass]="col?.['classNameBodyRow'] || ''"
+              (click)="isClickRecord() && onEmitRecord.emit(rowData)">
+              <ng-container *ngIf="col.customTemplate; else defaultTemplate">
+                <ng-container
+                  [ngTemplateOutlet]="col.customTemplate"
+                  [ngTemplateOutletContext]="{
+                    rowData: rowData,
+                    $implicit: rowData[col.field],
+                    col,
+                  }"></ng-container>
+              </ng-container>
+              <ng-template #defaultTemplate>
+                <span
+                  class="{{
+                    col?.['customTdClass']
+                      ? col?.['customTdClass']
+                      : 'block text-overflow-ellipsis white-space-nowrap overflow-hidden'
+                  }}"
+                  pTooltip="{{
+                    col?.['customTdClass'] ? '' : rowData[col.field]
+                  }}"
+                  tooltipPosition="left">
+                  {{ rowData[col.field] }}
+                </span>
+              </ng-template>
+            </td>
+          }
+        </tr>
+      }
+      @case ('custom') {
+        <ng-container
+          [ngTemplateOutlet]="customBodyTable"
+          [ngTemplateOutletContext]="{
+            $implicit: rowData,
+            index: index,
+          }"></ng-container>
+      }
+    }
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <ng-container
+      [ngTemplateOutlet]="footerTemplate"
+      [ngTemplateOutletContext]="{ $implicit: showColspan() }"></ng-container>
+  </ng-template>
+
+  <ng-template #emptyMessage pTemplate="emptymessage">
+    <tr class="border-radius">
+      <td class="text-center border-radius" [colSpan]="showColspan()">
+        <ng-content select="[emptymessage]"></ng-content>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
