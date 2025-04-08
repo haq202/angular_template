@@ -31,11 +31,12 @@ import {
 } from '@core/constant/common.const';
 import { CommonModule } from '@angular/common';
 import { TooltipModule } from 'primeng/tooltip';
+import { TruncatePipe } from '@core/pipes/truncate.pipe';
 
 @Component({
   selector: 'app-common-table',
   standalone: true,
-  imports: [TableModule, CommonModule, TooltipModule],
+  imports: [TableModule, CommonModule, TooltipModule, TruncatePipe],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -244,5 +245,9 @@ export class TableComponent implements OnChanges {
     }
 
     return colspan;
+  }
+
+  isDate(value: Date): boolean {
+    return moment(value, dateFormats, true).isValid();
   }
 }

@@ -100,6 +100,7 @@
               [style.minWidth]="col?.['minWidth'] || 'unset'"
               [style.width]="col?.['width'] || 'unset'"
               [ngClass]="col?.['classNameBodyRow'] || ''"
+              [class.cursor-pointer]="isClickRecord()"
               (click)="isClickRecord() && onEmitRecord.emit(rowData)">
               <ng-container *ngIf="col.customTemplate; else defaultTemplate">
                 <ng-container
@@ -115,13 +116,21 @@
                   class="{{
                     col?.['customTdClass']
                       ? col?.['customTdClass']
-                      : 'block text-overflow-ellipsis white-space-nowrap overflow-hidden'
+                      : 'break-word'
                   }}"
                   pTooltip="{{
-                    col?.['customTdClass'] ? '' : rowData[col.field]
+                    isDate(rowData[col.field])
+                      ? (rowData[col.field] | date: col.dateFormat)
+                      : rowData[col.field]
                   }}"
                   tooltipPosition="left">
-                  {{ rowData[col.field] }}
+                  <ng-container
+                    *ngIf="isDate(rowData[col.field]); else truncateTemplate">
+                    {{ rowData[col.field] | date: col.dateFormat }}
+                  </ng-container>
+                  <ng-template #truncateTemplate>
+                    {{ rowData[col.field] | truncate: col.maxLength }}
+                  </ng-template>
                 </span>
               </ng-template>
             </td>

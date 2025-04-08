@@ -6,10 +6,12 @@
   <router-outlet></router-outlet>
 </app-main-layout>
 
-<app-common-table
+<!-- <app-common-table
   [columns]="columns()"
   [data]="data()"
   [isShowOrderNumber]="true"
   [isShowCheckbox]="true"
   [selectedRows]="selectedRows()"
-  (onEmitSelectedRows)="selectedRows.set($event)"></app-common-table>
+  (onEmitSelectedRows)="selectedRows.set($event)"
+  (onEmitRecord)="onEmitRecord($event)"
+  [isClickRecord]="true"></app-common-table> -->

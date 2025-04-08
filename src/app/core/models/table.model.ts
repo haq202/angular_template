@@ -13,6 +13,8 @@ export interface IColumnsDefinition {
   tdColSpan: number;
   thClassName?: string;
   thRowSpan?: number;
+  maxLength?: number;
+  dateFormat?: string;
   [key: string]: unknown;
 }
 
