@@ -13,7 +13,7 @@ export class HttpApiService {
   get<R>(
     baseUrl: string | null,
     endpoint: string,
-    options: Record<string, any> = {}
+    options: Record<string, unknown> = {}
   ): Observable<R> {
     const api = this.handleParseUrl(baseUrl, endpoint, options);
     return this.http
@@ -24,7 +24,7 @@ export class HttpApiService {
   getV2<R>(
     baseUrl: string | null,
     endpoint: string,
-    options: Record<string, any> = {}
+    options: Record<string, unknown> = {}
   ): Observable<R> {
     const api = this.handleParseUrl(baseUrl, endpoint, options);
     return this.http.get<R>(api, options);
@@ -34,7 +34,7 @@ export class HttpApiService {
     baseUrl: string | null,
     body: T,
     endpoint: string,
-    options: Record<string, any> = {}
+    options: Record<string, unknown> = {}
   ): Observable<R> {
     const api = this.handleParseUrl(baseUrl, endpoint, options);
     return this.http
@@ -46,7 +46,7 @@ export class HttpApiService {
     baseUrl: string | null,
     body: T,
     endpoint: string,
-    options: Record<string, any> = {}
+    options: Record<string, unknown> = {}
   ): Observable<R> {
     const api = this.handleParseUrl(baseUrl, endpoint, options);
     return this.http.post<R>(api, body, options);
@@ -56,7 +56,7 @@ export class HttpApiService {
     baseUrl: string | null,
     body: T,
     endpoint: string,
-    options: Record<string, any> = {}
+    options: Record<string, unknown> = {}
   ): Observable<R> {
     const api = this.handleParseUrl(baseUrl, endpoint, options);
     return this.http
@@ -67,7 +67,7 @@ export class HttpApiService {
   delete<R>(
     baseUrl: string | null,
     endpoint: string,
-    options: Record<string, any> = {}
+    options: Record<string, unknown> = {}
   ): Observable<R> {
     const api = this.handleParseUrl(baseUrl, endpoint, options);
     return this.http
@@ -79,7 +79,7 @@ export class HttpApiService {
     baseUrl: string | null,
     body: T,
     endpoint: string,
-    options: Record<string, any> = {}
+    options: Record<string, unknown> = {}
   ): Observable<R> {
     const api = this.handleParseUrl(baseUrl, endpoint, options);
     return this.http
@@ -90,12 +90,12 @@ export class HttpApiService {
   handleParseUrl(
     baseUrl: string | null,
     endpoint: string,
-    options: Record<string, any> = {}
+    options: Record<string, unknown> = {}
   ): string {
     const keys = Object.keys(options);
     let api = '';
     for (const key of keys) {
-      endpoint = endpoint.replace(`{${key}}`, options[key]);
+      endpoint = endpoint.replace(`{${key}}`, String(options[key]));
     }
     if (!baseUrl) {
       baseUrl = environment.apis.default.url;

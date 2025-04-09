@@ -26,7 +26,7 @@
     "paths": {
       "@core/*": ["./src/app/core/*"],
       "@modules/*": ["./src/app/modules/*"],
-      "@components/*": ["./src/app/component/*"],
+      "@components/*": ["./src/app/components/*"],
       "@environment": ["./src/environments/environment.ts"]
     }
   },

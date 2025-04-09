@@ -1,0 +1,19 @@
+<div class="cover">
+  <div class="cover__left-bar">
+    <app-left-sidebar
+      [isLeftSidebarCollapsed]="isLeftSidebarCollapsed()"
+      (changeIsLeftSidebarCollapsed)="changeIsLeftSidebarCollapsed($event)"
+      [items]="items()" />
+  </div>
+
+  <div
+    class="cover__main"
+    [ngClass]="{
+      'cover__main--main-expanded': !isLeftSidebarCollapsed(),
+      'cover__main--main-collapsed': isLeftSidebarCollapsed(),
+    }">
+    <div class="cover__main--body">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

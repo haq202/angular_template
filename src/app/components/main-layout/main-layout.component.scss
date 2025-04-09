@@ -1,3 +1,24 @@
-:host {
-  display: block;
+.cover {
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 5rem);
+
+    &--main-expanded {
+      width: calc(100% - 16.5625rem);
+    }
+
+    &--main-collapsed {
+      width: calc(100% - 5rem);
+    }
+
+    &--body {
+      border-radius: 12px;
+      flex: 1 1 0;
+    }
+  }
 }

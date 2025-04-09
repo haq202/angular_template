@@ -25,7 +25,7 @@ export class TokenService {
           refreshToken: refreshToken,
         }
       )
-      .pipe(map((res: any) => res.data));
+      .pipe(map((res: IRefreshTokenResponse) => res));
   }
 
   setToken() {

@@ -1,7 +1,4 @@
-<app-left-sidebar
-  [isLeftSidebarCollapsed]="isLeftSidebarCollapsed()"
-  (changeIsLeftSidebarCollapsed)="changeIsLeftSidebarCollapsed($event)" />
-
-<app-main-layout>
+<div class="container">
+  <p-toast position="bottom-right"></p-toast>
   <router-outlet></router-outlet>
-</app-main-layout>
+</div>
