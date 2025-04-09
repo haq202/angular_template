@@ -1,17 +1,4 @@
-<app-left-sidebar
-  [isLeftSidebarCollapsed]="isLeftSidebarCollapsed()"
-  (changeIsLeftSidebarCollapsed)="changeIsLeftSidebarCollapsed($event)" />
-
-<app-main-layout>
+<div class="container">
+  <p-toast position="bottom-right"></p-toast>
   <router-outlet></router-outlet>
-</app-main-layout>
-
-<!-- <app-common-table
-  [columns]="columns()"
-  [data]="data()"
-  [isShowOrderNumber]="true"
-  [isShowCheckbox]="true"
-  [selectedRows]="selectedRows()"
-  (onEmitSelectedRows)="selectedRows.set($event)"
-  (onEmitRecord)="onEmitRecord($event)"
-  [isClickRecord]="true"></app-common-table> -->
+</div>

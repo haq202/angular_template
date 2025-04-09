@@ -1,15 +1,15 @@
 <div
   class="sidenav"
-  [ngClass]="isLeftSidebarCollapsed() ? 'sidenav-collapsed' : ''">
+  [ngClass]="isLeftSidebarCollapsed ? 'sidenav-collapsed' : 'sidenav-expanded'">
   <div class="logo-container">
-    <button class="logo" (click)="toggleCollapse()">
-      <i class="fal fa-bars"></i>
-    </button>
-    @if (!isLeftSidebarCollapsed()) {
+    <p-button
+      icon="pi pi-bars"
+      [rounded]="true"
+      [text]="true"
+      [raised]="true"
+      (click)="toggleCollapse()" />
+    @if (!isLeftSidebarCollapsed) {
       <div class="logo-text">App</div>
-      <button class="btn-close" (click)="closeSidenav()">
-        <i class="pi pi-bars close-icon"></i>
-      </button>
     }
   </div>
   <div class="sidenav-nav">
@@ -17,11 +17,11 @@
       <li class="sidenav-nav-item">
         <a
           class="sidenav-nav-link"
-          [routerLink]="item.routeLink"
+          [routerLink]="item.routerLink"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">
           <i class="sidenav-link-icon" [class]="item.icon"></i>
-          @if (!isLeftSidebarCollapsed()) {
+          @if (!isLeftSidebarCollapsed) {
             <span class="sidenav-link-text">{{ item.label }}</span>
           }
         </a>

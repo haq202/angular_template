@@ -13,3 +13,9 @@
     border: none;
   }
 }
+
+@layer primeng {
+  .p-button:focus {
+    box-shadow: none;
+  }
+}

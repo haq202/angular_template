@@ -1,0 +1,11 @@
+<app-main-layout>
+  <app-common-table
+    [columns]="columns()"
+    [data]="data()"
+    [isShowOrderNumber]="true"
+    [isShowCheckbox]="true"
+    [selectedRows]="selectedRows()"
+    (onEmitSelectedRows)="selectedRows.set($event)"
+    (onEmitRecord)="onEmitRecord($event)"
+    [isClickRecord]="true"></app-common-table>
+</app-main-layout>

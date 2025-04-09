@@ -35,3 +35,11 @@ export interface IExportFileCommon {
   downloadUrl?: string;
   mimeType?: string;
 }
+
+export interface IMenuItem {
+  routerLink: string;
+  icon: string;
+  label: string;
+  [key: string]: unknown;
+  isActive?: boolean;
+}
