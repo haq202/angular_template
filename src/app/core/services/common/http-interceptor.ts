@@ -18,6 +18,7 @@ import {
 } from 'rxjs';
 import { TokenService } from './token.service';
 import { ErrorHandlerService } from './error-handler.service';
+import { HTTP_STATUS_ERROR_NAME } from '@core/constant/common.const';
 
 // let requestCount = 0;
 let isRefreshing = false;
@@ -46,7 +47,7 @@ export const TokenInterceptor = (
   });
   return next(newReq).pipe(
     catchError(err => {
-      if (err instanceof HttpErrorResponse && err.status === 403) {
+      if (err instanceof HttpErrorResponse && err.status === HTTP_STATUS_ERROR_NAME.FORBIDDEN) {
         return handleRefreshToken(err, req, next, authToken);
       }
       return errorHanlder.handleError(err);
