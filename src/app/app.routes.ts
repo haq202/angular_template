@@ -3,7 +3,8 @@ import { DemoTableComponent } from './demo/demo-table/demo-table.component';
 
 export const routes: Routes = [
   {
-    path: 'demo-table',
+    path: '',
     component: DemoTableComponent,
-  },
+    pathMatch: 'full',
+  }
 ];

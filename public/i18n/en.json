@@ -1,0 +1,6 @@
+{
+    "DEMO": {
+        "TABLE": "Demo sample table",
+        "TEXT_INPUT_VALIDATOR": "Demo sample text validator"
+    }
+}
