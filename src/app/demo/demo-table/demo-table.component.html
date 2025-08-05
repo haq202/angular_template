@@ -1,11 +1,46 @@
 <app-main-layout>
-  <app-common-table
-    [columns]="columns()"
-    [data]="data()"
-    [isShowOrderNumber]="true"
-    [isShowCheckbox]="true"
-    [selectedRows]="selectedRows()"
-    (onEmitSelectedRows)="selectedRows.set($event)"
-    (onEmitRecord)="onEmitRecord($event)"
-    [isClickRecord]="true"></app-common-table>
+  <div class="flex flex-column gap-2">
+    <h1>{{ 'DEMO.TABLE' | translate }}</h1>
+    <app-common-table
+      [columns]="columns()"
+      [data]="data()"
+      [isShowOrderNumber]="true"
+      [isShowCheckbox]="true"
+      [selectedRows]="selectedRows()"
+      (onEmitSelectedRows)="selectedRows.set($event)"
+      (onEmitRecord)="onEmitRecord($event)"
+      [isClickRecord]="true"></app-common-table>
+
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <h1>{{ 'DEMO.TEXT_INPUT_VALIDATOR' | translate }}</h1>
+      <div class="flex flex-column gap-1 w-3">
+        <input
+          pInputText
+          type="text"
+          placeholder="Search by name"
+          formControlName="name" />
+        <app-message-validator
+          [formGroup]="formGroup"
+          [controlKey]="'name'"></app-message-validator>
+
+          <p-button label="Language" (onClick)="onChangeLang($event)"/>
+      </div>
+    </form>
+  </div>
+  <ng-template #actionTemplate let-rowData="rowData">
+    <!-- <div class="flex justify-content-center align-items-center gap-2"> -->
+      <!-- <i class="pi pi-pencil" (onClick)="onEdit(rowData, $event)"></i>
+      <i class="pi pi-trash" (onClick)="onDelete(rowData, $event)"></i> -->
+
+      <span class="flex justify-content-center gap-2">
+        <p-button class="accept" (onClick)="onEdit(rowData, $event)"
+          >Edit</p-button
+        >
+        <p-button class="reject" (onClick)="onDelete(rowData, $event)"
+          >Delete</p-button
+        >
+      </span>
+    <!-- </div> -->
+  </ng-template>
 </app-main-layout>
+

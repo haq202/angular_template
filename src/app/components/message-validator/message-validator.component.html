@@ -1,0 +1,6 @@
+@if (
+  formGroup.get(controlKey)?.invalid &&
+  (formGroup.get(controlKey)?.touched || formGroup.get(controlKey)?.dirty)
+) {
+  <small class="text-danger">{{ message }}</small>
+}
